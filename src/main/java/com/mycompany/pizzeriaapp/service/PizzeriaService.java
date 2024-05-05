@@ -2,6 +2,7 @@ package com.mycompany.pizzeriaapp.service;
 
 import com.mycompany.pizzeriaapp.dto.PizzeriaDto;
 import com.mycompany.pizzeriaapp.entity.PizzeriaEntity;
+import com.mycompany.pizzeriaapp.exception.NotFoundException;
 import com.mycompany.pizzeriaapp.repository.PizzeriaRepositories;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,17 @@ public class PizzeriaService {
         return pizzerias;
     }
 
+    public PizzeriaDto getPizzeriaById(Long id) {
+        if(pizzeriaRepositories.existsById(id)) {
+           PizzeriaEntity pe = pizzeriaRepositories.findById(id).get();
+            return makePizzeriaDto(pe);
+        } else throw new NotFoundException("Такой пиццерии не существует");
+    }
 
-
+    public Boolean deleteById(Long id) {
+        if(pizzeriaRepositories.existsById(id)) {
+            pizzeriaRepositories.deleteById(id);
+            return true;
+        } else return false;
+    }
 }
