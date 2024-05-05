@@ -13,6 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "pizzeria")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)

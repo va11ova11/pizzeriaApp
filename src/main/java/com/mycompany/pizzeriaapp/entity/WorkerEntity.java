@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 @Entity
 @Table(name = "worker")
 @FieldDefaults(level = AccessLevel.PRIVATE)

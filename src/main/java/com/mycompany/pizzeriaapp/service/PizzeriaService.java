@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mycompany.pizzeriaapp.Util.dtoMaker.makePizzeriaDto;
+import static com.mycompany.pizzeriaapp.Util.dtoMaker.makePizzeriaEntity;
 
 @Service
 public class PizzeriaService {
@@ -21,12 +22,10 @@ public class PizzeriaService {
     }
 
 
-    public PizzeriaDto addPizzeria(PizzeriaDto newPizzeria) {
-        PizzeriaEntity newPizzeriaEntity = new PizzeriaEntity();
-        newPizzeriaEntity.setAddress(newPizzeria.getAddress());
-        newPizzeriaEntity.setQuantityWorkers(newPizzeria.getQuantityWorkers());
+    public PizzeriaDto addPizzeria(PizzeriaDto pizzeriaDto) {
+        PizzeriaEntity newPizzeriaEntity = makePizzeriaEntity(pizzeriaDto);
         pizzeriaRepositories.save(newPizzeriaEntity);
-        return newPizzeria;
+        return pizzeriaDto;
     }
 
     public List<PizzeriaDto> getAllPizzerias() {
@@ -39,8 +38,7 @@ public class PizzeriaService {
 
     public PizzeriaDto getPizzeriaById(Long id) {
         if(pizzeriaRepositories.existsById(id)) {
-           PizzeriaEntity pe = pizzeriaRepositories.findById(id).get();
-            return makePizzeriaDto(pe);
+            return makePizzeriaDto(pizzeriaRepositories.findById(id).get());
         } else throw new NotFoundException("Такой пиццерии не существует");
     }
 
