@@ -1,18 +1,17 @@
 package com.mycompany.pizzeriaapp.Util;
 
-import com.mycompany.pizzeriaapp.dto.PizzeriaDto;
+import com.mycompany.pizzeriaapp.dto.RestaurantDto;
 import com.mycompany.pizzeriaapp.dto.WorkerDto;
-import com.mycompany.pizzeriaapp.entity.PizzeriaEntity;
+import com.mycompany.pizzeriaapp.entity.RestaurantEntity;
 import com.mycompany.pizzeriaapp.entity.WorkerEntity;
-import com.mycompany.pizzeriaapp.service.PizzeriaService;
 
 public class dtoMaker {
 
-    public static PizzeriaDto makePizzeriaDto(PizzeriaEntity pizzeriaEntity) {
-        return  PizzeriaDto.builder()
-                .id(pizzeriaEntity.getId())
-                .address(pizzeriaEntity.getAddress())
-                .quantityWorkers(pizzeriaEntity.getQuantityWorkers())
+    public static RestaurantDto makeRestaurantDto(RestaurantEntity restaurantEntity) {
+        return  RestaurantDto.builder()
+                .id(restaurantEntity.getId())
+                .address(restaurantEntity.getAddress())
+                .quantityWorkers(restaurantEntity.getQuantityWorkers())
                 .build();
     }
 
@@ -25,10 +24,10 @@ public class dtoMaker {
                 .build();
     }
 
-    public static PizzeriaEntity makePizzeriaEntity(PizzeriaDto pizzeriaDto) {
-        return PizzeriaEntity.builder()
-                .address(pizzeriaDto.getAddress())
-                .quantityWorkers(pizzeriaDto.getQuantityWorkers())
+    public static RestaurantEntity makeRestaurantEntity(RestaurantDto restaurantDto) {
+        return RestaurantEntity.builder()
+                .address(restaurantDto.getAddress())
+                .quantityWorkers(restaurantDto.getQuantityWorkers())
                 .build();
     }
 

@@ -14,10 +14,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "pizzeria")
+@Table(name = "restaurant")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PizzeriaEntity {
+public class RestaurantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +27,13 @@ public class PizzeriaEntity {
     String address;
 
    @OneToMany
-   @JoinColumn(name = "pizzeria_id")
+   @JoinColumn(name = "restaurant_id")
    Set<WorkerEntity> workerEntities =new HashSet<>();
 
    @Column(name = "quantity_workers")
    Integer quantityWorkers;
+
+   public void addWorker(WorkerEntity workerEntity) {
+     workerEntities.add(workerEntity);
+   }
 }
