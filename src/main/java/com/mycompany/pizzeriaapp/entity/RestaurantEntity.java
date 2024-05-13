@@ -27,8 +27,12 @@ public class RestaurantEntity {
     String address;
 
    @OneToMany
-   @JoinColumn(name = "restaurant_id")
-   Set<WorkerEntity> workerEntities =new HashSet<>();
+   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   Set<WorkerEntity> workerEntities = new HashSet<>();
+
+   @OneToMany
+   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   Set<CourierEntity> courierEntities = new HashSet<>();
 
    @Column(name = "quantity_workers")
    Integer quantityWorkers;
