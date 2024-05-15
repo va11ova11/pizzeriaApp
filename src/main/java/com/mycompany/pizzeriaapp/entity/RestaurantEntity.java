@@ -40,4 +40,7 @@ public class RestaurantEntity {
    public void addWorker(WorkerEntity workerEntity) {
      workerEntities.add(workerEntity);
    }
+   public void addCourier(CourierEntity courierEntity) {
+     courierEntities.add(courierEntity);
+   }
 }

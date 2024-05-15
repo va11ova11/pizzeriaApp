@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.mycompany.pizzeriaapp.Util.dtoMaker.makeWorkerDto;
-import static com.mycompany.pizzeriaapp.Util.dtoMaker.makeWorkerEntity;
+import static com.mycompany.pizzeriaapp.Util.WorkerMapper.mapToWorkerDto;
+import static com.mycompany.pizzeriaapp.Util.WorkerMapper.mapToWorkerEntity;
 
 @Service
 public class WorkerService {
@@ -23,7 +22,7 @@ public class WorkerService {
 
 
     public WorkerDto addWorker(WorkerDto workerDto) {
-        WorkerEntity workerEntity = makeWorkerEntity(workerDto);
+        WorkerEntity workerEntity = mapToWorkerEntity(workerDto);
         workerRepository.save(workerEntity);
         return workerDto;
     }
@@ -32,14 +31,14 @@ public class WorkerService {
     public List<WorkerDto> getAllWorkers() {
         List<WorkerDto> workers = new ArrayList<>();
         for (WorkerEntity we : workerRepository.findAll()) {
-            workers.add(makeWorkerDto(we));
+            workers.add(mapToWorkerDto(we));
         }
         return workers;
     }
 
     public WorkerDto getWorkerById(Long id) {
         if (workerRepository.existsById(id)) {
-            return makeWorkerDto(workerRepository.findById(id).get());
+            return mapToWorkerDto(workerRepository.findById(id).get());
         } else throw new NotFoundException(String.format("Работника с id - %s не существует", id));
     }
 
@@ -52,7 +51,7 @@ public class WorkerService {
 
     public WorkerDto getWorkerByNameAndSurname(String name, String surname) {
         if(workerRepository.existsByNameAndSurname(name, surname)) {
-           return makeWorkerDto(workerRepository.getWorkerEntitiesByNameAndSurname(name, surname));
+           return mapToWorkerDto(workerRepository.getWorkerEntitiesByNameAndSurname(name, surname));
         } else throw new NotFoundException(String.format(
                 "Работника с именем %s и фвмилией %s не существует", name, surname));
     }
