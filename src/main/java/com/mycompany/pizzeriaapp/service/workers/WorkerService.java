@@ -1,4 +1,4 @@
-package com.mycompany.pizzeriaapp.service;
+package com.mycompany.pizzeriaapp.service.workers;
 
 import com.mycompany.pizzeriaapp.dto.WorkerDto;
 import com.mycompany.pizzeriaapp.entity.WorkerEntity;

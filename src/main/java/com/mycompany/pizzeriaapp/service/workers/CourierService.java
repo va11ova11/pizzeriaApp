@@ -1,4 +1,4 @@
-package com.mycompany.pizzeriaapp.service;
+package com.mycompany.pizzeriaapp.service.workers;
 
 import static com.mycompany.pizzeriaapp.Util.CourierMapper.mapToCourierDto;
 import static com.mycompany.pizzeriaapp.Util.CourierMapper.mapToCourierEntity;

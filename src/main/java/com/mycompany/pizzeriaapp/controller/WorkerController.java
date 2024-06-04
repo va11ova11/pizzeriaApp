@@ -1,7 +1,8 @@
 package com.mycompany.pizzeriaapp.controller;
 
 import com.mycompany.pizzeriaapp.dto.WorkerDto;
-import com.mycompany.pizzeriaapp.service.WorkerService;
+import com.mycompany.pizzeriaapp.service.workers.WorkerService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class WorkerController {
         this.workerService = workerService;
     }
     @PostMapping
-    public WorkerDto addWorker(@RequestBody WorkerDto workerDto) {
+    public WorkerDto addWorker(@Valid @RequestBody WorkerDto workerDto) {
         return workerService.addWorker(workerDto);
     }
 

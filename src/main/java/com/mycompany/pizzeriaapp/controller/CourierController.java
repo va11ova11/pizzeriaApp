@@ -1,7 +1,8 @@
 package com.mycompany.pizzeriaapp.controller;
 
 import com.mycompany.pizzeriaapp.dto.CourierDto;
-import com.mycompany.pizzeriaapp.service.CourierService;
+import com.mycompany.pizzeriaapp.service.workers.CourierService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class CourierController {
   }
 
   @PostMapping
-  public ResponseEntity<CourierDto> addCourier(@RequestBody CourierDto courierDto) {
+  public ResponseEntity<CourierDto> addCourier(@Valid @RequestBody CourierDto courierDto) {
     CourierDto savedCourier = courierService.addCourier(courierDto);
     return new ResponseEntity<>(savedCourier, HttpStatus.OK);
   }
