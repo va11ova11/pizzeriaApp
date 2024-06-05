@@ -22,7 +22,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "order_position")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderPosition {
+public class OrderPositionEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

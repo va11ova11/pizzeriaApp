@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.HashSet;
+import java.util.Queue;
 import java.util.Set;
 
 
@@ -36,6 +37,11 @@ public class RestaurantEntity {
 
    @Column(name = "quantity_workers")
    Integer quantityWorkers;
+
+   @Column(name = "orders")
+   @OneToMany
+   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   Set<OrderEntity> orders = new HashSet<>();
 
    public void addWorker(WorkerEntity workerEntity) {
      workerEntities.add(workerEntity);

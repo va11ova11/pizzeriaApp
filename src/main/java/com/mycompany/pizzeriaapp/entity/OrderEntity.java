@@ -1,35 +1,27 @@
 package com.mycompany.pizzeriaapp.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @Entity
 @Inheritance
 @Table(name = "orders")
@@ -47,10 +39,13 @@ public class OrderEntity {
   @Column(name = "time_order_created")
   LocalDateTime timeOrderCreated;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "order_id", referencedColumnName = "id")
-  List<OrderPosition> orderPositions = new ArrayList<>();
+  List<OrderPositionEntity> orderPositionEntities;
 
   @Column(name = "payment_type")
   String paymentType;
+
+  @Column(name = "time_to_cook")
+  Duration timeToCook;
 }

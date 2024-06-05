@@ -4,18 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.HashSet;
-import java.util.Set;
-
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Builder
-@Table(name = "courier")
-@Entity
+@Table(name = "client")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CourierEntity {
+public class ClientEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +20,11 @@ public class CourierEntity {
 
     String name;
 
-    String surname;
+    @Column(name = "client_phone_number")
+    String clientPhoneNumber;
 
-    Long kilometre;
+    String address;
 
-    @OneToMany
-    @JoinColumn(name = "courier_id" ,referencedColumnName = "id")
-    Set<OrderEntity> orders = new HashSet<>();
+    @Column(name = "people_quantity")
+    Integer numberOfCutlery;
 }
