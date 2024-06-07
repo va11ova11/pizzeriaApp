@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.HashSet;
+import java.util.Queue;
 import java.util.Set;
 
 
@@ -26,18 +27,30 @@ public class RestaurantEntity {
     @Column(name = "address", length = 70)
     String address;
 
-   @OneToMany
-   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   @OneToMany(mappedBy = "restaurantEntity")
    Set<WorkerEntity> workerEntities = new HashSet<>();
 
-   @OneToMany
-   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   @OneToMany(mappedBy = "restaurantEntity")
    Set<CourierEntity> courierEntities = new HashSet<>();
 
    @Column(name = "quantity_workers")
    Integer quantityWorkers;
 
+   @Column(name = "orders")
+   @OneToMany
+   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   Set<OrderEntity> orders = new HashSet<>();
+
    public void addWorker(WorkerEntity workerEntity) {
      workerEntities.add(workerEntity);
+   }
+   public void addCourier(CourierEntity courierEntity) {
+     courierEntities.add(courierEntity);
+   }
+   public void deleteWorker(WorkerEntity we) {
+     workerEntities.remove(we);
+   }
+   public void deleteCourier(CourierEntity ce) {
+     courierEntities.remove(ce);
    }
 }

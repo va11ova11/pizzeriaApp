@@ -1,7 +1,9 @@
 package com.mycompany.pizzeriaapp.controller;
 
 import com.mycompany.pizzeriaapp.dto.WorkerDto;
-import com.mycompany.pizzeriaapp.service.WorkerService;
+import com.mycompany.pizzeriaapp.service.workers.WorkerService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class WorkerController {
         this.workerService = workerService;
     }
     @PostMapping
-    public WorkerDto addWorker(@RequestBody WorkerDto workerDto) {
+    public WorkerDto addWorker(@Valid @RequestBody WorkerDto workerDto) {
         return workerService.addWorker(workerDto);
     }
 
@@ -31,10 +33,9 @@ public class WorkerController {
     }
 
     @DeleteMapping("/{id}")
-    public Boolean deleteWorkerById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteWorkerById(@PathVariable Long id) {
         return workerService.deleteWorkerById(id);
     }
-
 
     @GetMapping("/search")
     public WorkerDto getWorkerByNameAndSurname(@RequestParam String name,
