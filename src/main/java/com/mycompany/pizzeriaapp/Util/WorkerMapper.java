@@ -17,11 +17,23 @@ public class WorkerMapper {
   }
 
   public static WorkerDto mapToWorkerDto(WorkerEntity workerEntity) {
-    return WorkerDto.builder()
-        .id(workerEntity.getId())
-        .name(workerEntity.getName())
-        .surname(workerEntity.getSurname())
-        .workerPost(workerEntity.getWorkerPost())
-        .build();
+    if (workerEntity.getRestaurantEntity() != null) {
+      return WorkerDto.builder()
+          .id(workerEntity.getId())
+          .name(workerEntity.getName())
+          .surname(workerEntity.getSurname())
+          .workerPost(workerEntity.getWorkerPost())
+          .workingRestaurantAddress(workerEntity.getRestaurantEntity().getAddress())
+          .build();
+    }
+    else {
+      return WorkerDto.builder()
+          .id(workerEntity.getId())
+          .name(workerEntity.getName())
+          .surname(workerEntity.getSurname())
+          .workerPost(workerEntity.getWorkerPost())
+          .workingRestaurantAddress("Работник не работает ни в одном ресторане")
+          .build();
+    }
   }
 }

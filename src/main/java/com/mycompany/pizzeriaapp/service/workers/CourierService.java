@@ -10,6 +10,8 @@ import com.mycompany.pizzeriaapp.exception.NotFoundException;
 import com.mycompany.pizzeriaapp.repository.CourierRepository;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,8 +25,7 @@ public class CourierService {
 
 
   public CourierDto addCourier(CourierDto courierDto) {
-    CourierEntity courierEntity = mapToCourierEntity(courierDto);
-    CourierEntity savedCourier = courierRepository.save(courierEntity);
+    CourierEntity savedCourier = courierRepository.save(mapToCourierEntity(courierDto));
     return mapToCourierDto(savedCourier);
   }
 
@@ -45,6 +46,16 @@ public class CourierService {
   }
 
   public List<CourierDto> getCouriers() {
-    return courierRepository.findAll().stream().map(CourierMapper::mapToCourierDto).collect(Collectors.toList());
+    return courierRepository.findAll().stream()
+        .map(CourierMapper::mapToCourierDto)
+        .collect(Collectors.toList());
+  }
+
+  public ResponseEntity<String> deleteCourier(Long id) {
+    if(courierRepository.existsById(id)) {
+      courierRepository.deleteById(id);
+      return new ResponseEntity<>(String.format("Курьер с id - %s удалён",id), HttpStatus.OK);
+    } else
+      throw new NotFoundException("Удаляемого курьера с id - %s не существует");
   }
 }

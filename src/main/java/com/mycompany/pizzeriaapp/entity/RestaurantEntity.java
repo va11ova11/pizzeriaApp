@@ -27,12 +27,10 @@ public class RestaurantEntity {
     @Column(name = "address", length = 70)
     String address;
 
-   @OneToMany
-   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   @OneToMany(mappedBy = "restaurantEntity")
    Set<WorkerEntity> workerEntities = new HashSet<>();
 
-   @OneToMany
-   @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+   @OneToMany(mappedBy = "restaurantEntity")
    Set<CourierEntity> courierEntities = new HashSet<>();
 
    @Column(name = "quantity_workers")
@@ -48,5 +46,11 @@ public class RestaurantEntity {
    }
    public void addCourier(CourierEntity courierEntity) {
      courierEntities.add(courierEntity);
+   }
+   public void deleteWorker(WorkerEntity we) {
+     workerEntities.remove(we);
+   }
+   public void deleteCourier(CourierEntity ce) {
+     courierEntities.remove(ce);
    }
 }

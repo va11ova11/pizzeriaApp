@@ -1,6 +1,7 @@
 package com.mycompany.pizzeriaapp.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mycompany.pizzeriaapp.Util.WorkerPost;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,4 +30,9 @@ public class WorkerEntity {
     @Column(name = "post", length = 15)
     @Enumerated(EnumType.STRING)
     WorkerPost workerPost;
+
+    @ManyToOne
+    @JoinColumn(name="restaurant_id", nullable = false)
+    @JsonIgnore
+    RestaurantEntity restaurantEntity;
 }

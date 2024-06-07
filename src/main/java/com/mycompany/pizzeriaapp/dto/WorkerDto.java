@@ -1,5 +1,6 @@
 package com.mycompany.pizzeriaapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mycompany.pizzeriaapp.Util.WorkerPost;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +17,7 @@ public class WorkerDto {
 
     Long id;
 
-    @NotBlank(message = "Имя ряботника не задано")
+    @NotBlank(message = "Имя работника не задано")
     @Size(max = 15, message = "Слишком длинное имя")
     String name;
 
@@ -26,4 +27,7 @@ public class WorkerDto {
 
     @NotNull(message = "Должность работника не задана")
     WorkerPost workerPost;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    String workingRestaurantAddress;
 }
